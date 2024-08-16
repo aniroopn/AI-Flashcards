@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Habits AI Flashcards - Demographic Survey</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #00bfa5;
+            border-radius: 5px;
+            transition: width 0.4s ease;
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        h2 {
+            color: #00bfa5;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #444;
+            font-weight: bold;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+        input[type="number"]:focus, input[type="text"]:focus, select:focus {
+            border-color: #00bfa5;
+            outline: none;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: #00bfa5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button-container button:disabled {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="progress-bar">
+            <div class="progress" id="progress-bar"></div>
+        </div>
+        <form id="surveyForm">
+            <!-- Existing Questions -->
+            <div class="question active" id="question1">
+                <h2>Age</h2>
+                <label for="age">What is your age?</label>
+                <input type="number" id="age" name="age" min="1" max="100" required>
+            </div>
+            <div class="question" id="question2">
+                <h2>Gender</h2>
+                <label for="gender">What is your gender?</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+            </div>
+            <div class="question" id="question3">
+                <h2>Location</h2>
+                <label for="location">Where are you located (Country)?</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="question" id="question4">
+                <h2>Lifestyle Activity Level</h2>
+                <label for="lifestyle">What is your lifestyle activity level?</label>
+                <select id="lifestyle" name="lifestyle" required>
+                    <option value="sedentary">Sedentary</option>
+                    <option value="moderately-active">Moderately Active</option>
+                    <option value="active">Active</option>
+                    <option value="very-active">Very Active</option>
+                </select>
+            </div>
+            <div class="question" id="question5">
+                <h2>Diet Type</h2>
+                <label for="diet">What is your diet type?</label>
+                <select id="diet" name="diet" required>
+                    <option value="omnivorous">Omnivorous</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="pescatarian">Pescatarian</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="question" id="question6">
+                <h2>Sleep</h2>
+                <label for="sleep">How many hours do you sleep per night?</label>
+                <input type="number" id="sleep" name="sleep" min="1" max="24" required>
+            </div>
+            <div class="question" id="question7">
+                <h2>Main Health Goal</h2>
+                <label for="health_goal">What is your main health goal?</label>
+                <select id="health_goal" name="health_goal" required>
+                    <option value="weight-loss">Weight Loss</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="mental-wellbeing">Mental Wellbeing</option>
+                    <option value="longevity">Longevity</option>
+                    <option value="disease-prevention">Disease Prevention</option>
+                </select>
+            </div>
+
+            <!-- New Questions -->
+            <div class="question" id="question8">
+                <h2>Water Intake</h2>
+                <label for="water_intake">How many liters of water do you drink per day?</label>
+                <input type="number" id="water_intake" name="water_intake" min="0.5" max="10" step="0.1" required>
+            </div>
+            <div class="question" id="question9">
+                <h2>Smoking Habit</h2>
+                <label for="smoking">Do you smoke?</label>
+                <select id="smoking" name="smoking" required>
+                    <option value="no">No</option>
+                    <option value="occasionally">Occasionally</option>
+                    <option value="regularly">Regularly</option>
+                    <option value="quit">I have quit</option>
+                </select>
+            </div>
+            <div class="question" id="question10">
+                <h2>Exercise Frequency</h2>
+                <label for="exercise">How often do you exercise per week?</label>
+                <select id="exercise" name="exercise" required>
+                    <option value="none">None</option>
+                    <option value="1-2">1-2 times</option>
+                    <option value="3-4">3-4 times</option>
+                    <option value="5+">5 or more times</option>
+                </select>
+            </div>
+            <div class="question" id="question11">
+                <h2>Stress Level</h2>
+                <label for="stress">How would you rate your daily stress level?</label>
+                <select id="stress" name="stress" required>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                    <option value="very-high">Very High</option>
+                </select>
+            </div>
+            <div class="question" id="question12">
+                <h2>Medical Conditions</h2>
+                <label for="medical_conditions">Do you have any existing medical conditions?</label>
+                <input type="text" id="medical_conditions" name="medical_conditions">
+            </div>
+
+            <div class="button-container">
+                <button type="button" id="prevButton" onclick="showPrevQuestion()" disabled>Back</button>
+                <button type="button" id="nextButton" onclick="showNextQuestion()">Next</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const questions = document.querySelectorAll('.question');
+        const progressBar = document.getElementById('progress-bar');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        let currentQuestion = 0;
+
+        function showNextQuestion() {
+            if (validateCurrentQuestion()) {
+                questions[currentQuestion].classList.remove('active');
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    questions[currentQuestion].classList.add('active');
+                    updateProgressBar();
+                } else {
+                    document.getElementById('surveyForm').submit();
+                }
+                updateButtons();
+            }
+        }
+
+        function showPrevQuestion() {
+            if (currentQuestion > 0) {
+                questions[currentQuestion].classList.remove('active');
+                currentQuestion--;
+                questions[currentQuestion].classList.add('active');
+                updateProgressBar();
+                updateButtons();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = (currentQuestion / (questions.length - 1)) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        function updateButtons() {
+            prevButton.disabled = currentQuestion === 0;
+            nextButton.textContent = currentQuestion === questions.length - 1 ? 'Submit' : 'Next';
+        }
+
+        function validateCurrentQuestion() {
+            const inputs = questions[currentQuestion].querySelectorAll('input, select');
+            let valid = true;
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        questions.forEach(question => {
+            const inputs = question.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    nextButton.disabled = !validateCurrentQuestion();
+                });
+            });
+        });
+
+        updateProgressBar();
+        updateButtons();
+    </script>
+</body>
+</html>
+
